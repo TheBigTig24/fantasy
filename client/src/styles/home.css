@@ -2,7 +2,28 @@
     height: 90vh;
     width: 100vw;
     background-color: #013034;
-    color: #003135;
     margin: 0;
     padding: 0;
+    display: flex;
+}
+
+.user-matches {
+    width: 75%;
+    height: 100%;
+    border: 2px solid;
+}
+
+.recent-matches {
+    width: 25%;
+    height: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+h1 {
+    align-self: center;
+    color: white;
 }

@@ -43,6 +43,21 @@ button {
     cursor: pointer;
 }
 
+#login {
+    width: 5%;
+    height: 50%;
+    color: white;
+    background-color: #0faf94;
+    border: 0px;
+    border-radius: 8px;
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-right: 2%;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 #login:hover {
     background-color: #064339;
 }
