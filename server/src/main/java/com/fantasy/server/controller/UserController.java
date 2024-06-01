@@ -32,6 +32,16 @@ public class UserController {
         return userService.getUser();
     }
 
+    @GetMapping("/users/findOneById")
+    public User getOneById(@RequestParam Integer id) {
+        User u = userService.getOneById(id);
+        if (u == null) {
+            return null;
+        } else {
+            return u;
+        }
+    }
+
     @PostMapping("/users/addOne")
     public @ResponseBody String addSingleUser(@RequestBody User user) {
         return userService.postUser(user);
