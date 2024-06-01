@@ -20,7 +20,6 @@ public class UserController {
     private UserService userService;
 
     public UserController() {
-        this.userService = userService;
     }
 
     @Autowired
@@ -28,12 +27,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/users/findAll")
     public List<User> getUser() {
         return userService.getUser();
     }
 
-    @PostMapping("/post")
+    @PostMapping("/users/addOne")
     public @ResponseBody String addSingleUser(@RequestBody User user) {
         return userService.postUser(user);
     }
