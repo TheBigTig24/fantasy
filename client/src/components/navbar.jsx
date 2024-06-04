@@ -1,10 +1,17 @@
 import '../styles/navbar.css'
 import Dropdown from '../assets/navbar.png'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
 
+    const navigate = useNavigate();
+
     const Login = () => {
-        alert("your mom")
+        navigate("/login");
+    }
+
+    const navHome = () => {
+        navigate("/");
     }
 
     const toggleMenuOn = () => {
@@ -21,9 +28,9 @@ const NavBar = () => {
         <div className='container'>
             <h2>Name</h2>
             <ul className='navbar-links'>
-                <li>Home</li>
-                <li>Schedule</li>
-                <li>Stats</li>
+                <li><button className='navLinks' onClick={navHome}>Home</button></li>
+                <li><button className='navLinks'>Schedule</button></li>
+                <li><button className='navLinks'>Stats</button></li>
             </ul>
             <button id='login' onClick={Login} >Login</button>
             <button className='dropdown' onClick={toggleMenuOn} >
@@ -32,7 +39,7 @@ const NavBar = () => {
             <div className='menu' id='menu'>
                 <button className='exit-dropdown' id='exit-dropdown' onClick={toggleMenuOff}></button>
                 <ul>
-                    <li><button className='dd-btn'>Home</button></li>
+                    <li><button className='dd-btn' onClick={navHome}>Home</button></li>
                     <li><button className='dd-btn'>Schedule</button></li>
                     <li><button className='dd-btn'>Stats</button></li>
                 </ul>
