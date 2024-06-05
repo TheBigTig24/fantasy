@@ -11,6 +11,12 @@
     width: 75%;
     height: 100%;
     border: 2px solid;
+    padding: 1rem;
+    display: inline;
+}
+
+#create-server {
+    width: 3%;
 }
 
 .recent-matches {

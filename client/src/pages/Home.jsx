@@ -71,6 +71,8 @@ const Home = () => {
         <NavBar />
         <div className='contain'>
             <div className='user-matches'>
+                <h1>Your Servers</h1>
+                <button id='create-server'></button>
             </div>
             <div className='recent-matches'>
                 <h1>Recent Matches</h1>
