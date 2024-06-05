@@ -1,14 +1,12 @@
 package com.fantasy.server.service;
 
-import com.fantasy.server.User;
+import com.fantasy.server.models.User;
 import com.fantasy.server.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,7 @@
 package com.fantasy.server.controller;
 
+import com.fantasy.server.models.User;
 import com.fantasy.server.service.UserService;
-import com.fantasy.server.User;
 
 import java.util.List;
 

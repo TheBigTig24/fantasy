@@ -1,4 +1,4 @@
-package com.fantasy.server;
+package com.fantasy.server.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -76,4 +76,5 @@ public class User {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
 }
