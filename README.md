@@ -9,5 +9,6 @@ This is my first solo fullstack application. I aim to use React.js, vanilla CSS,
 * Mapping GET and POST REST endpoints in Java Spring **(5/31/2024)**
 * Creating tables, columns, and adding entities to a MySQL Db via Java **(5/31/2024)**
 * Creating and adding API Key authentication in Java **(6/5/2024)**
+* Using and creating custom HQL queries in the extended JPA Repository interface **(6/7/2024)**
 
 -bigtig
