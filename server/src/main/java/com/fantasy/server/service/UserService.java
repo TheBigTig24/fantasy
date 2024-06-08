@@ -30,6 +30,19 @@ public class UserService {
         User opt = userRepo.findOne(exam).orElse(null);
         return opt;
     }
+
+    public User getOneByEmail(String email) {
+        User u = new User();
+        u.setEmail(email);
+        User bruh = userRepo.findOneByEmail(email);
+        return bruh;
+    }
+
+    public User checkIfUserExists(User user) {
+        User bruh = userRepo.findOneByEmailAndPassword(user.getEmail(), user.getPassword());
+        return bruh;
+
+    }
     
     public String postUser(User u) {
         userRepo.save(u);

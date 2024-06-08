@@ -4,11 +4,8 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -38,6 +35,11 @@ public class User {
     private Set<PlayerServer> playerServers;
 
     public User() {}
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public User(int userId, String email, String username, String password, String createdAt) {
         this.userId = userId;
@@ -85,6 +87,11 @@ public class User {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    // just for testing purposes for now
+    public String toString() {
+        return "Email: " + this.email + " Password: " + this.password + " UserId: " + this.userId;
     }
 
 }
