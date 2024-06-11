@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +17,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UserService(UserRepository userRepo) {
         this.userRepo = userRepo;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public List<User> getUser() {
@@ -39,12 +45,17 @@ public class UserService {
     }
 
     public User checkIfUserExists(User user) {
-        User bruh = userRepo.findOneByEmailAndPassword(user.getEmail(), user.getPassword());
-        return bruh;
-
+        User foundUser = userRepo.findOneByEmail(user.getEmail());
+        if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+            return foundUser;
+        } else {
+            return null;
+        }
     }
     
     public String postUser(User u) {
+        String encodedPassword = this.passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
         userRepo.save(u);
         return "Saved";
     }
