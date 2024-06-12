@@ -22,7 +22,7 @@ const Login = () => {
                 <input onChange={(e) => setUsername(e.target.value)} placeholder="username" ></input>
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="password" ></input>
                 <button id='sign-in'>Log In</button>
-                <p>Don't have an account? Create one <a onClick={navCreate}>here</a></p>
+                <p>Don't have an account? Create one <a onClick={navCreate} id='here'>here</a></p>
             </div>
         </div>
     </>)
