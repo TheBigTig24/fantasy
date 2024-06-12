@@ -94,7 +94,7 @@ public class User {
 
     // just for testing purposes for now
     public String toString() {
-        return "Email: " + this.email + " Password: " + this.password + " UserId: " + this.userId;
+        return "userId: " + this.userId + ", email: " + this.email + ", username: " + this.username;
     }
 
 }

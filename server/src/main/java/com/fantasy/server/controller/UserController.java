@@ -1,13 +1,15 @@
 package com.fantasy.server.controller;
 
+import com.fantasy.server.dataObjects.ResponseObject;
+import com.fantasy.server.dataObjects.UserTransfer;
 import com.fantasy.server.models.User;
 import com.fantasy.server.service.UserService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -67,11 +69,34 @@ public class UserController {
     }
 
     @PutMapping("/users/addOne")
-    public @ResponseBody Map<String, String> addSingleUser(@RequestBody User user) {
-        String response = userService.postUser(user);
-        HashMap<String, String> returnJson = new HashMap<String, String>();
-        returnJson.put("msg", response);
-        return returnJson;
+    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> addSingleUser(@RequestBody User user) {
+
+        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
+        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+
+        UserTransfer foundUserByEmail = userService.checkIfUserExistsByEmail(user);
+        if (foundUserByEmail != null) {
+            responseObject.setData(foundUserByEmail);
+            responseObject.setMsg("Email already exists.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CONFLICT);
+            return responseEntity;
+        }
+
+        UserTransfer foundUserByUsername = userService.checkIfUserExistsByUsername(user);
+        if (foundUserByUsername != null) {
+            responseObject.setData(foundUserByUsername);
+            responseObject.setMsg("Username already exists.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CONFLICT);
+            return responseEntity;
+        }
+
+        UserTransfer response = userService.postUser(user);
+
+        responseObject.setData(response);
+        responseObject.setMsg("User was created successfully.");
+        responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CREATED);
+        
+        return responseEntity;
     }
     
 }

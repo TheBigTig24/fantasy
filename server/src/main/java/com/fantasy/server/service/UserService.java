@@ -1,5 +1,6 @@
 package com.fantasy.server.service;
 
+import com.fantasy.server.dataObjects.UserTransfer;
 import com.fantasy.server.models.User;
 import com.fantasy.server.repository.UserRepository;
 
@@ -52,11 +53,33 @@ public class UserService {
             return null;
         }
     }
+
+    public UserTransfer checkIfUserExistsByEmail(User user) {
+        User foundUser = userRepo.findOneByEmail(user.getEmail());
+        if (foundUser == null) {
+            return null;
+        } else {
+            UserTransfer userTransfer = new UserTransfer(foundUser.getUserId(), foundUser.getUsername());
+            return userTransfer;
+        }
+    }
+
+    public UserTransfer checkIfUserExistsByUsername(User user) {
+        User foundUser = userRepo.findOneByUsername(user.getUsername());
+        if (foundUser == null) {
+            return null;
+        } else {
+            UserTransfer userTransfer = new UserTransfer(foundUser.getUserId(), foundUser.getUsername());
+            return userTransfer;
+        }
+    }
     
-    public String postUser(User u) {
+    public UserTransfer postUser(User u) {
         String encodedPassword = this.passwordEncoder.encode(u.getPassword());
         u.setPassword(encodedPassword);
         userRepo.save(u);
-        return "User has been added successfully.";
+
+        UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());
+        return userTransfer;
     }
 }
