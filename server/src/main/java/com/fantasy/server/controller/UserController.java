@@ -3,7 +3,9 @@ package com.fantasy.server.controller;
 import com.fantasy.server.models.User;
 import com.fantasy.server.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,8 +67,11 @@ public class UserController {
     }
 
     @PutMapping("/users/addOne")
-    public @ResponseBody String addSingleUser(@RequestBody User user) {
-        return userService.postUser(user);
+    public @ResponseBody Map<String, String> addSingleUser(@RequestBody User user) {
+        String response = userService.postUser(user);
+        HashMap<String, String> returnJson = new HashMap<String, String>();
+        returnJson.put("msg", response);
+        return returnJson;
     }
     
 }

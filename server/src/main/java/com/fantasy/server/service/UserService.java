@@ -57,6 +57,6 @@ public class UserService {
         String encodedPassword = this.passwordEncoder.encode(u.getPassword());
         u.setPassword(encodedPassword);
         userRepo.save(u);
-        return "Saved";
+        return "User has been added successfully.";
     }
 }
