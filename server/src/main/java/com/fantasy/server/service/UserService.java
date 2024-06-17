@@ -39,10 +39,8 @@ public class UserService {
     }
 
     public User getOneByEmail(String email) {
-        User u = new User();
-        u.setEmail(email);
-        User bruh = userRepo.findOneByEmail(email);
-        return bruh;
+        User u = userRepo.findOneByEmail(email);
+        return u;
     }
 
     public User checkIfUserExists(User user) {
