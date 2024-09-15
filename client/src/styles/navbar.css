@@ -81,6 +81,8 @@ button {
 
 #login:hover {
     background-color: #064339;
+    transform: scale(1.05);
+    transition: all 100ms ease-in;
 }
 
 .dropdown {
