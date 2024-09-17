@@ -1,0 +1,16 @@
+#upcoming-match-container {
+    width: 60vw;
+    height: 18%;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: darkgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#p-tag {
+    color: black;
+    font-size: 24px;
+}

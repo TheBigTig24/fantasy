@@ -1,0 +1,10 @@
+#upcoming-header {
+    justify-self: flex-start;
+    margin-top: 1%;
+    color: white;
+}
+
+#container {
+    flex-direction: column;
+    justify-content: space-around;
+}
