@@ -80,4 +80,10 @@ public class UserService {
         UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());
         return userTransfer;
     }
+
+    public UserTransfer deleteUser(User u) {
+        userRepo.deleteById(u.getUserId());
+        UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());
+        return userTransfer;
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.fantasy.server.models.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Serializable> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query(nativeQuery = true, value = "select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.username from users u1_0 where u1_0.email=:emailVar")
     User findOneByEmail(@Param("emailVar") String email);
