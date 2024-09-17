@@ -21,7 +21,8 @@ const Home = () => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            setLCKid(res.data.leagues[2].id)
+            console.log(res.data.leagues)
+            setLCKid(res.data.leagues[3].id)
         }).catch((error) => {
             console.log(error)
         })
@@ -71,8 +72,10 @@ const Home = () => {
         <NavBar />
         <div className='contain'>
             <div className='user-matches'>
-                <h1>Your Servers</h1>
-                <button id='create-server'></button>
+                <div className='user-matches-inner'>
+                    <h1>Your Servers</h1>
+                    <button id='create-server'></button>
+                </div>
             </div>
             <div className='recent-matches'>
                 <h1>Recent Matches</h1>
