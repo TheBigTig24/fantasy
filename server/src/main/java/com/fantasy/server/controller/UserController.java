@@ -60,12 +60,21 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    public boolean userLogIn(@RequestBody User user) {
-        User u = userService.checkIfUserExists(user);
+    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> userLogIn(@RequestBody User user) {
+
+        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
+        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+
+        UserTransfer u = userService.checkIfUserExists(user);
         if (u != null) {
-            return true;
+            responseObject.setData(u);
+            responseObject.setMsg("Login Successful.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
+            return responseEntity;
         } else {
-            return false;
+            responseObject.setMsg("Unable to Log in.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
+            return responseEntity;
         }
     }
 

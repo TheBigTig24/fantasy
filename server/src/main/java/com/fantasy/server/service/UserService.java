@@ -43,11 +43,16 @@ public class UserService {
         return u;
     }
 
-    public User checkIfUserExists(User user) {
-        User foundUser = userRepo.findOneByEmail(user.getEmail());
-        if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
-            return foundUser;
-        } else {
+    public UserTransfer checkIfUserExists(User user) {
+        try {
+            User foundUser = userRepo.findOneByEmail(user.getEmail());
+            if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+                UserTransfer userTransfer = new UserTransfer(foundUser.getUserId(), foundUser.getUsername());
+                return userTransfer;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             return null;
         }
     }
