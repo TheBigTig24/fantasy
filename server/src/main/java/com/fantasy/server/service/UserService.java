@@ -81,6 +81,16 @@ public class UserService {
         return userTransfer;
     }
 
+    public boolean checkHasMissingParameters(User u) {
+        if (u.getEmail() == null || u.getPassword() == null || u.getUsername() == null || u.getCreatedAt() == null) {
+            return true;
+        } else if (u.getEmail() == "" || u.getPassword() == "" || u.getUsername() == "" || u.getCreatedAt() == "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public UserTransfer deleteUser(User u) {
         userRepo.deleteById(u.getUserId());
         UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());

@@ -74,6 +74,13 @@ public class UserController {
 
         ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
         ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+        
+        boolean hasMissingParameters = userService.checkHasMissingParameters(user);
+        if (hasMissingParameters) {
+            responseObject.setMsg("There are missing parameters.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNPROCESSABLE_ENTITY);
+            return responseEntity;
+        }
 
         UserTransfer foundUserByEmail = userService.checkIfUserExistsByEmail(user);
         if (foundUserByEmail != null) {
