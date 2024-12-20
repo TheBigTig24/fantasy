@@ -5,10 +5,13 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.SecondaryTable;
 import jakarta.persistence.Table;
@@ -16,18 +19,17 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "PlayerServers")
+@Table(name = "Servers")
 @SecondaryTable(name = "Settings", pkJoinColumns = @PrimaryKeyJoinColumn(name = "ServerID"))
 public class PlayerServer {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "serverId")
     private int serverId;
 
-    @Column
-    @ManyToMany
-    @JoinTable(name = "user_to_servers", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "server_id"))
-    private Set<User> users;
+    @OneToMany(mappedBy = "playerServer")
+    private Set<ServerRank> users;
 
     @Embedded
     @Column
@@ -38,7 +40,7 @@ public class PlayerServer {
 
     public PlayerServer() {}
 
-    public PlayerServer(int serverId, Set<User> users, Setting settings, String accessCode) {
+    public PlayerServer(int serverId, Set<ServerRank> users, Setting settings, String accessCode) {
         this.serverId = serverId;
         this.users = users;
         this.settings = settings;
@@ -54,11 +56,11 @@ public class PlayerServer {
         this.serverId = serverId;
     }
 
-    public Set<User> getUsers() {
+    public Set<ServerRank> getUsers() {
         return this.users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<ServerRank> users) {
         this.users = users;
     }
 
