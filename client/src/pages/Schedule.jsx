@@ -8,6 +8,7 @@ import UpcomingMatch from "../components/upcomingMatch";
 const Schedule = () => {
 
     const [stuff, setStuff] = useState([]);
+    const [starts, setStarts] = useState([]);
     const [LCKid, setLCKid] = useState();
 
     // sets LCK League Id
@@ -39,11 +40,12 @@ const Schedule = () => {
             return res.json();
         }).then((res) => {
             let events = res.data.schedule.events;
-            let maxLength = 6;
+            let maxLength = 5;
             for (let i = 0; i < events.length; i++) {
                 if (events[i].state == "unstarted" && maxLength > 0 && stuff.length < maxLength) {
-                    console.log(i + " " + events[i].match.id);
-                    setStuff((oldArray) => [...oldArray, events[i].match.id])
+                    // console.log(i + " " + events[i].match.id + " " + events[i].startTime);
+                    setStuff((oldArray) => [...oldArray, events[i].match.id]);
+                    setStarts((prev) => [...prev, events[i].startTime]);
                     maxLength--;
                 }
             }
@@ -53,7 +55,7 @@ const Schedule = () => {
     }, [LCKid]);
 
     useEffect(() => {
-        console.log("stuff" + stuff);
+        // console.log(stuff);
     }, [stuff])
 
     return (<>
@@ -61,8 +63,8 @@ const Schedule = () => {
         <div id="container">
         <h2 id="upcoming-header">Upcoming Matches</h2>
             <div id="schedule-inner-container">
-                {stuff.map((val) => {
-                    return (<UpcomingMatch matchid={val} />)
+                {stuff.map((val, i) => {
+                    return (<UpcomingMatch matchid={val} time={starts[i]} />)
                 })}
             </div>
         </div>
