@@ -1,7 +1,7 @@
-import '../styles/home.css'
-import NavBar from '../components/navbar'
-import RecentMatch from '../components/recentMatch'
-import { useState, useEffect } from 'react'
+import '../styles/home.css';
+import NavBar from '../components/navbar';
+import RecentMatch from '../components/recentMatch';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
 
@@ -12,7 +12,8 @@ const Home = () => {
 
     // sets LCK League Id
     useEffect(() => {
-        fetch("https://esports-api.lolesports.com/persisted/gw/getLeagues?hl=en-US", {
+        const url = "https://esports-api.lolesports.com/persisted/gw/getLeagues?hl=en-US";
+        fetch(url, {
             "method": "GET",
             "headers": {
                 'Content-Type': 'application/json',
@@ -21,11 +22,11 @@ const Home = () => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            setLCKid(res.data.leagues[2].id)
+            setLCKid(res.data.leagues[3].id);
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
         })
-    }, [])
+    }, []);
 
     // gets match Ids of last three completed matches in LCK
     useEffect(() => {
@@ -38,33 +39,33 @@ const Home = () => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            const eventArr = res.data.schedule.events
+            const eventArr = res.data.schedule.events;
             if (lastThree.length < 3) {
                 let count = 3;
                 for (let i = eventArr.length - 1; i >= 0; i--) {
                     if (eventArr[i].state == "completed" && count != 0) {
                         setLastThree((oldArray) => [...oldArray, eventArr[i].match.id]);
-                        setLastThreeTimes((oldArray) => [...oldArray, convertTime(eventArr[i].startTime.substring(0,10))])
+                        setLastThreeTimes((oldArray) => [...oldArray, convertTime(eventArr[i].startTime.substring(0,10))]);
                         count--;
                     }
                 }
             }
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
         })
-    }, [LCKid])
+    }, [LCKid]);
 
     // logs the last three completed matches' ids
     useEffect(() => {
-    }, [lastThree])
+    }, [lastThree]);
 
     // convert date format
     function convertTime(originalFormat) {
-        const month = months[parseInt(originalFormat.substring(5,7)) - 1]
-        const day = parseInt(originalFormat.substring(8,10))
-        const year = parseInt(originalFormat.substring(0,4))
+        const month = months[parseInt(originalFormat.substring(5,7)) - 1];
+        const day = parseInt(originalFormat.substring(8,10));
+        const year = parseInt(originalFormat.substring(0,4));
 
-        return month + " " + day + ", " + year
+        return month + " " + day + ", " + year;
     }
 
     return(<>
@@ -82,6 +83,6 @@ const Home = () => {
             </div>
         </div>
     </>)
-}
+};
 
 export default Home;

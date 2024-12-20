@@ -7,11 +7,12 @@ import UpcomingMatch from "../components/upcomingMatch";
 
 const Schedule = () => {
 
-    const [stuff, setStuff] = useState([])
-    const [LCKid, setLCKid] = useState()
+    const [stuff, setStuff] = useState([]);
+    const [LCKid, setLCKid] = useState();
 
     // sets LCK League Id
     useEffect(() => {
+        setStuff([]);
         fetch("https://esports-api.lolesports.com/persisted/gw/getLeagues?hl=en-US", {
             "method": "GET",
             "headers": {
@@ -25,7 +26,7 @@ const Schedule = () => {
         }).catch((error) => {
             console.log(error)
         })
-    }, [])
+    }, []);
 
     useEffect(() => {
         fetch("https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=en-US&leagueId=" + LCKid, {
@@ -38,9 +39,10 @@ const Schedule = () => {
             return res.json();
         }).then((res) => {
             let events = res.data.schedule.events;
-            let maxLength = 8;
+            let maxLength = 6;
             for (let i = 0; i < events.length; i++) {
-                if (events[i].state == "unstarted" && maxLength > 0 && stuff.length < 8) {
+                if (events[i].state == "unstarted" && maxLength > 0 && stuff.length < maxLength) {
+                    console.log(i + " " + events[i].match.id);
                     setStuff((oldArray) => [...oldArray, events[i].match.id])
                     maxLength--;
                 }
@@ -48,22 +50,23 @@ const Schedule = () => {
         }).catch((error) => {
             console.log(error);
         })
-    }, [LCKid])
+    }, [LCKid]);
 
     useEffect(() => {
-        console.log(stuff)
+        console.log("stuff" + stuff);
     }, [stuff])
 
     return (<>
         <NavBar/>
         <div id="container">
-            <h2 id="upcoming-header">Upcoming Matches</h2>
-            <UpcomingMatch matchid={stuff[0]} />
-            <UpcomingMatch matchid={stuff[1]} />
-            <UpcomingMatch matchid={stuff[2]} />
-            <UpcomingMatch matchid={stuff[3]} />
+        <h2 id="upcoming-header">Upcoming Matches</h2>
+            <div id="schedule-inner-container">
+                {stuff.map((val) => {
+                    return (<UpcomingMatch matchid={val} />)
+                })}
+            </div>
         </div>
     </>)
-}
+};
 
 export default Schedule;

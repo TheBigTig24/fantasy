@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import '../styles/upcomingMatch.css'
+import { useState, useEffect } from 'react';
+import '../styles/upcomingMatch.css';
 
 const UpcomingMatch = (matchId) => {
 
@@ -8,23 +8,23 @@ const UpcomingMatch = (matchId) => {
     const [numGames, setNumGames] = useState();
 
     useEffect(() => {
-        fetch("https://esports-api.lolesports.com/persisted/gw/getEventDetails?hl=en-US&id=" + matchId.matchid, {
+        const url = "https://esports-api.lolesports.com/persisted/gw/getEventDetails?hl=en-US&id=" + matchId.matchid;
+        fetch(url, {
             "method": "GET",
             "headers": {
                 'Content-Type': 'application/json',
                 'x-api-key': '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z'
             }
         }).then((res) => {
-            return res.json()
+            return res.json();
         }).then((res) => {
-            console.log(res)
-            setTeamOne(res.data.event.match.teams[0].code)
-            setTeamTwo(res.data.event.match.teams[1].code)
-            setNumGames(res.data.event.match.strategy.count)
+            setTeamOne(res.data.event.match.teams[0].code);
+            setTeamTwo(res.data.event.match.teams[1].code);
+            setNumGames(res.data.event.match.strategy.count);
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
         })
-    })
+    });
 
 
 
@@ -33,6 +33,6 @@ const UpcomingMatch = (matchId) => {
             <p id='p-tag'>{teamOne} VS {teamTwo} in a Best Of {numGames}</p>
         </div>
     )
-}
+};
 
 export default UpcomingMatch;

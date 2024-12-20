@@ -1,6 +1,6 @@
-import '../styles/navbar.css'
-import Dropdown from '../assets/navbar.png'
-import { useNavigate } from 'react-router-dom'
+import '../styles/navbar.css';
+import Dropdown from '../assets/navbar.png';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -15,7 +15,7 @@ const NavBar = () => {
     }
 
     const navSchedule = () => {
-        navigate("/schedule")
+        navigate("/schedule");
     }
 
     const toggleMenuOn = () => {
@@ -51,6 +51,6 @@ const NavBar = () => {
             </div>
         </div>
     </>)
-}
+};
 
 export default NavBar;
