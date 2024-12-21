@@ -1,6 +1,6 @@
-import '../styles/navbar.css'
-import Dropdown from '../assets/navbar.png'
-import { useNavigate } from 'react-router-dom'
+import '../styles/navbar.css';
+import Dropdown from '../assets/navbar.png';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -12,6 +12,10 @@ const NavBar = () => {
 
     const navHome = () => {
         navigate("/");
+    }
+
+    const navSchedule = () => {
+        navigate("/schedule");
     }
 
     const toggleMenuOn = () => {
@@ -29,7 +33,7 @@ const NavBar = () => {
             <h2>Name</h2>
             <ul className='navbar-links'>
                 <li><button className='navLinks' onClick={navHome}>Home</button></li>
-                <li><button className='navLinks'>Schedule</button></li>
+                <li><button className='navLinks' onClick={navSchedule}>Schedule</button></li>
                 <li><button className='navLinks'>Stats</button></li>
             </ul>
             <button id='login' onClick={Login} >Login</button>
@@ -40,13 +44,13 @@ const NavBar = () => {
                 <button className='exit-dropdown' id='exit-dropdown' onClick={toggleMenuOff}></button>
                 <ul>
                     <li><button className='dd-btn' onClick={navHome}>Home</button></li>
-                    <li><button className='dd-btn'>Schedule</button></li>
+                    <li><button className='dd-btn' onClick={navSchedule}>Schedule</button></li>
                     <li><button className='dd-btn'>Stats</button></li>
                 </ul>
                 <button id='dd-login'>Login</button>
             </div>
         </div>
     </>)
-}
+};
 
 export default NavBar;
