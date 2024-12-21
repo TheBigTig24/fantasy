@@ -1,6 +1,7 @@
 import '../styles/home.css';
 import NavBar from '../components/navbar';
 import RecentMatch from '../components/recentMatch';
+import PlayerServer from '../components/playerServer';
 import { useState, useEffect } from 'react';
 
 const Home = () => {
@@ -76,6 +77,7 @@ const Home = () => {
                     <h1>Your Servers</h1>
                     <button id='create-server'></button>
                 </div>
+                <PlayerServer></PlayerServer>
             </div>
             <div className='recent-matches'>
                 <h1>Recent Matches</h1>
