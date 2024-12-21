@@ -5,7 +5,7 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Setting {
-    
+
     @Column(name = "killMult", table = "Settings")
     private int killMult;
 

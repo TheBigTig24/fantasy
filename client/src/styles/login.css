@@ -38,6 +38,11 @@ input {
     margin: .5rem ;
 }
 
+#sign-in:hover {
+    transition: all 100ms ease-in;
+    transform: scale(1.05);
+}
+
 #here {
     text-decoration: underline;
     cursor: pointer;

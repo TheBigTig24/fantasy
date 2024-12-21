@@ -43,11 +43,16 @@ public class UserService {
         return u;
     }
 
-    public User checkIfUserExists(User user) {
-        User foundUser = userRepo.findOneByEmail(user.getEmail());
-        if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
-            return foundUser;
-        } else {
+    public UserTransfer checkIfUserExists(User user) {
+        try {
+            User foundUser = userRepo.findOneByEmail(user.getEmail());
+            if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+                UserTransfer userTransfer = new UserTransfer(foundUser.getUserId(), foundUser.getUsername());
+                return userTransfer;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             return null;
         }
     }
@@ -77,6 +82,22 @@ public class UserService {
         u.setPassword(encodedPassword);
         userRepo.save(u);
 
+        UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());
+        return userTransfer;
+    }
+
+    public boolean checkHasMissingParameters(User u) {
+        if (u.getEmail() == null || u.getPassword() == null || u.getUsername() == null || u.getCreatedAt() == null) {
+            return true;
+        } else if (u.getEmail() == "" || u.getPassword() == "" || u.getUsername() == "" || u.getCreatedAt() == "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public UserTransfer deleteUser(User u) {
+        userRepo.deleteById(u.getUserId());
         UserTransfer userTransfer = new UserTransfer(u.getUserId(), u.getUsername());
         return userTransfer;
     }

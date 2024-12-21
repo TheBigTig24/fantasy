@@ -11,18 +11,42 @@
     width: 75%;
     height: 100%;
     border: 2px solid;
+    border-top: 0px;
     padding: 1rem;
     display: inline;
 }
 
+.user-matches-inner {
+    display: flex;
+}
+
 #create-server {
-    width: 3%;
+    --b: 4px; /* the thickness */
+    width: 3%; /* the size */
+    aspect-ratio: 1;
+    border: 10px solid #0faf94; /* the outer space */
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0faf94 90deg,#000 0) 
+      calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+      calc(50%  + var(--b))   calc(50%  + var(--b));
+    display: inline;
+}
+
+#create-server:hover {
+    border: 11px solid #064339;
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#064339 90deg,#000 0) 
+      calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+      calc(50%  + var(--b))   calc(50%  + var(--b));
+    transform: scale(1.05);
+    transition: all 100ms ease-in;
 }
 
 .recent-matches {
     width: 25%;
     height: 100%;
     border: 2px solid black;
+    border-top: 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

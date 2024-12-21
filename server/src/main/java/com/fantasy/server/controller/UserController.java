@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -59,12 +60,21 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    public boolean userLogIn(@RequestBody User user) {
-        User u = userService.checkIfUserExists(user);
+    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> userLogIn(@RequestBody User user) {
+
+        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
+        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+
+        UserTransfer u = userService.checkIfUserExists(user);
         if (u != null) {
-            return true;
+            responseObject.setData(u);
+            responseObject.setMsg("Login Successful.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
+            return responseEntity;
         } else {
-            return false;
+            responseObject.setMsg("Unable to Log in.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
+            return responseEntity;
         }
     }
 
@@ -73,6 +83,13 @@ public class UserController {
 
         ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
         ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+        
+        boolean hasMissingParameters = userService.checkHasMissingParameters(user);
+        if (hasMissingParameters) {
+            responseObject.setMsg("There are missing parameters.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNPROCESSABLE_ENTITY);
+            return responseEntity;
+        }
 
         UserTransfer foundUserByEmail = userService.checkIfUserExistsByEmail(user);
         if (foundUserByEmail != null) {
@@ -99,4 +116,24 @@ public class UserController {
         return responseEntity;
     }
     
+    @DeleteMapping("users/deleteOneById")
+    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> deleteSingleUser(@RequestBody User user) {
+
+        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
+        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+        
+        User u1 = userService.getOneById(user.getUserId());
+        if (u1 == null) {
+            responseObject.setMsg("User was not found.");
+            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.NOT_FOUND);
+            return responseEntity;
+        }
+
+        UserTransfer u = userService.deleteUser(u1);
+
+        responseObject.setData(u);
+        responseObject.setMsg("User has been deleted successfully.");
+        responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
+        return responseEntity;
+    }
 }

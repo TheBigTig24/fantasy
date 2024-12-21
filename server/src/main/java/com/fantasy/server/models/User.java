@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -33,9 +33,9 @@ public class User {
     @Column(name = "createdAt")
     private String createdAt;
 
-    @ManyToMany(mappedBy = "users")
     @Column
-    private Set<PlayerServer> playerServers;
+    @OneToMany(mappedBy = "user")
+    private Set<ServerRank> playerServers;
 
     public User() {}
 
@@ -44,12 +44,13 @@ public class User {
         this.password = password;
     }
 
-    public User(int userId, String email, String username, String password, String createdAt) {
+    public User(int userId, String email, String username, String password, String createdAt, Set<ServerRank> playerServers) {
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.password = password;
         this.createdAt = createdAt;
+        this.playerServers = playerServers;
     }
 
     public int getId() {
@@ -90,6 +91,14 @@ public class User {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<ServerRank> getServers() {
+        return playerServers;
+    }
+
+    public void setPlayerServers(Set<ServerRank> playerServers) {
+        this.playerServers = playerServers;
     }
 
     // just for testing purposes for now
