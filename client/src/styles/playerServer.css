@@ -1,0 +1,25 @@
+#player-server-container {
+    width: 18%;
+    height: auto;
+    aspect-ratio: 1;
+    border: 2px solid black;
+    background-color: darkgray;
+    margin-bottom: 8%;
+}
+
+#player-server-container:hover {
+    background-color: rgb(112, 112, 112);
+}
+
+#ps-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    color: black;
+}
+
+#server-name {
+    font-size: x-large;
+}

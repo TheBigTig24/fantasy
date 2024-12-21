@@ -18,6 +18,7 @@
 
 .user-matches-inner {
     display: flex;
+    margin-bottom: 1%;
 }
 
 #create-server {
@@ -56,4 +57,9 @@
 h1 {
     align-self: center;
     color: white;
+}
+
+#servers-container {
+    display: flex;
+    flex-direction: row;
 }
