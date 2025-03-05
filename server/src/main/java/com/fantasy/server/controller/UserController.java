@@ -3,6 +3,9 @@ package com.fantasy.server.controller;
 import com.fantasy.server.dataObjects.ResponseObject;
 import com.fantasy.server.dataObjects.UserTransfer;
 import com.fantasy.server.models.User;
+import com.fantasy.server.models.UserInfo;
+import com.fantasy.server.service.JwtService;
+import com.fantasy.server.service.UserInfoService;
 import com.fantasy.server.service.UserService;
 
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +29,14 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserInfoService service;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired AuthenticationManager authenticationManager;
 
     public UserController() {
     }
@@ -76,6 +88,11 @@ public class UserController {
             responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
             return responseEntity;
         }
+    }
+
+    @PostMapping("/users/addNewUser")
+    public String addNewUser(@RequestBody UserInfo userInfo) {
+        return service.addUser(userInfo);
     }
 
     @PutMapping("/users/addOne")
@@ -136,4 +153,5 @@ public class UserController {
         responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
         return responseEntity;
     }
+
 }
