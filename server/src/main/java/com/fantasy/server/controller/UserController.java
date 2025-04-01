@@ -10,16 +10,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@RequestMapping("/users")
 @RestController
 public class UserController {
 
@@ -34,12 +37,20 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/findAll")
-    public List<User> getUser() {
-        return userService.getUser();
+    @GetMapping("/me")
+    public ResponseEntity<User> authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
     }
 
-    @GetMapping("/users/findOneById")
+    @GetMapping("/findAll")
+    public ResponseEntity<List<User>> getUser() {
+        List<User> allUsers = userService.getUser();
+        return ResponseEntity.ok(allUsers);
+    }
+
+    @GetMapping("/findOneById")
     public User getOneById(@RequestParam Integer id) {
         User u = userService.getOneById(id);
         if (u == null) {
@@ -49,7 +60,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/findOneByEmail")
+    @GetMapping("/findOneByEmail")
     public User getOneByEmail(@RequestParam String email) {
         User u = userService.getOneByEmail(email);
         if (u == null) {
@@ -59,26 +70,26 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/login")
-    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> userLogIn(@RequestBody User user) {
+    // @PostMapping("/login")
+    // public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> userLogIn(@RequestBody User user) {
 
-        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
-        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
+    //     ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
+    //     ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
 
-        UserTransfer u = userService.checkIfUserExists(user);
-        if (u != null) {
-            responseObject.setData(u);
-            responseObject.setMsg("Login Successful.");
-            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
-            return responseEntity;
-        } else {
-            responseObject.setMsg("Unable to Log in.");
-            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
-            return responseEntity;
-        }
-    }
+    //     UserTransfer u = userService.checkIfUserExists(user);
+    //     if (u != null) {
+    //         responseObject.setData(u);
+    //         responseObject.setMsg("Login Successful.");
+    //         responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
+    //         return responseEntity;
+    //     } else {
+    //         responseObject.setMsg("Unable to Log in.");
+    //         responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
+    //         return responseEntity;
+    //     }
+    // }
 
-    @PutMapping("/users/addOne")
+    @PutMapping("/addOne")
     public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> addSingleUser(@RequestBody User user) {
 
         ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
@@ -116,7 +127,7 @@ public class UserController {
         return responseEntity;
     }
     
-    @DeleteMapping("users/deleteOneById")
+    @DeleteMapping("/deleteOneById")
     public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> deleteSingleUser(@RequestBody User user) {
 
         ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
