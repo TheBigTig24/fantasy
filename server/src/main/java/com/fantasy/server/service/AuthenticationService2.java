@@ -40,11 +40,10 @@ public class AuthenticationService2 {
     public User signup(RegisterUserDto input) {
 
         // check if exists
-        Optional<User> existingUser = userRepository.findByEmail(input.getEmail());
+        Optional<User> existingUsername = userRepository.findByUsername(input.getUsername());
+        Optional<User> existingEmail = userRepository.findUserByEmail(input.getEmail());
 
-        if (existingUser == null) {
-            return null;
-        } else {
+        if (existingUsername.isEmpty() && existingEmail.isEmpty()) {
             // make new user
             User user = new User(input.getEmail(), passwordEncoder.encode(input.getPassword()), input.getUsername());
             user.setVerificationCode(generateVerificationCode());
@@ -53,6 +52,8 @@ public class AuthenticationService2 {
             user.setCreatedAt(LocalDateTime.now());
             sendVerificationEmail(user);
             return userRepository.save(user);
+        } else {
+            return null;
         }
     }
 

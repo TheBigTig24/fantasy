@@ -31,6 +31,9 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
         try{
             User registeredUser = authenticationService2.signup(registerUserDto);
+            if (registeredUser == null) {
+                return ResponseEntity.badRequest().body("User already exists.");
+            }
             return ResponseEntity.ok(registeredUser);
         } catch (RuntimeException rte) {
             return ResponseEntity.badRequest().body(rte.getMessage());
