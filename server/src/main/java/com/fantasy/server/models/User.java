@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "createdAt")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     // @Column
     // @OneToMany(mappedBy = "user")
@@ -64,7 +64,7 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public User(int userId, String email, String username, String password, String createdAt/*, Set<ServerRank> playerServers*/ ) {
+    public User(int userId, String email, String username, String password, LocalDateTime createdAt/*, Set<ServerRank> playerServers*/ ) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -133,11 +133,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

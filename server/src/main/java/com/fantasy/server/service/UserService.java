@@ -89,7 +89,7 @@ public class UserService {
     public boolean checkHasMissingParameters(User u) {
         if (u.getEmail() == null || u.getPassword() == null || u.getUsername() == null || u.getCreatedAt() == null) {
             return true;
-        } else if (u.getEmail() == "" || u.getPassword() == "" || u.getUsername() == "" || u.getCreatedAt() == "") {
+        } else if (u.getEmail() == "" || u.getPassword() == "" || u.getUsername() == "" || u.getCreatedAt() == null) {
             return true;
         } else {
             return false;
