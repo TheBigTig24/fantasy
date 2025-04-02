@@ -1,5 +1,6 @@
 package com.fantasy.server.controller;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +28,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
-        User registeredUser = authenticationService2.signup(registerUserDto);
-        return ResponseEntity.ok(registeredUser);
+    public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
+        try{
+            User registeredUser = authenticationService2.signup(registerUserDto);
+            return ResponseEntity.ok(registeredUser);
+        } catch (RuntimeException rte) {
+            return ResponseEntity.badRequest().body(rte.getMessage());
+        }
     }
 
     @PostMapping("/login")

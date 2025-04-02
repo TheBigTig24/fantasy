@@ -1,5 +1,6 @@
 package com.fantasy.server.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
@@ -37,12 +38,22 @@ public class AuthenticationService2 {
     }
 
     public User signup(RegisterUserDto input) {
-        User user = new User(input.getEmail(), passwordEncoder.encode(input.getPassword()), input.getUsername());
-        user.setVerificationCode(generateVerificationCode());
-        user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
-        user.setEnabled(false);
-        sendVerificationEmail(user);
-        return userRepository.save(user);
+
+        // check if exists
+        Optional<User> existingUser = userRepository.findByEmail(input.getEmail());
+
+        if (existingUser == null) {
+            return null;
+        } else {
+            // make new user
+            User user = new User(input.getEmail(), passwordEncoder.encode(input.getPassword()), input.getUsername());
+            user.setVerificationCode(generateVerificationCode());
+            user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
+            user.setEnabled(false);
+            user.setCreatedAt(LocalDateTime.now());
+            sendVerificationEmail(user);
+            return userRepository.save(user);
+        }
     }
 
     public User authenticate(LoginUserDto input) {
