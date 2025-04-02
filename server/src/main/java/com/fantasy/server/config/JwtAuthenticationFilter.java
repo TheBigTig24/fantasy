@@ -1,5 +1,6 @@
 package com.fantasy.server.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,7 @@ import lombok.NonNull;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
 
+    @Autowired
     private final JwtService jwtService;
 
     private final UserDetailsService userDetailsService;
