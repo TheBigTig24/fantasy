@@ -6,12 +6,16 @@ const NavBar = () => {
 
     const navigate = useNavigate();
 
+    const navLanding = () => {
+        navigate("/");
+    }
+
     const Login = () => {
         navigate("/login");
     }
 
     const navHome = () => {
-        navigate("/");
+        navigate("/home");
     }
 
     const navSchedule = () => {
@@ -30,7 +34,7 @@ const NavBar = () => {
 
     return(<>
         <div className='container'>
-            <h2>Name</h2>
+            <h2 onClick={navLanding}>Name</h2>
             <ul className='navbar-links'>
                 <li><button className='navLinks' onClick={navHome}>Home</button></li>
                 <li><button className='navLinks' onClick={navSchedule}>Schedule</button></li>

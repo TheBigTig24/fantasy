@@ -23,7 +23,7 @@ const Home = () => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            setLCKid(res.data.leagues[3].id);
+            setLCKid(res.data.leagues[4].id);
         }).catch((error) => {
             console.log(error);
         })

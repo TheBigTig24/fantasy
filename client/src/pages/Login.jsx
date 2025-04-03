@@ -19,10 +19,16 @@ const Login = () => {
         <div id='container'>
             <div id='login-box'>
                 <h2 id='sign-header'>Sign In</h2>
-                <input onChange={(e) => setUsername(e.target.value)} placeholder="username" ></input>
-                <input onChange={(e) => setPassword(e.target.value)} placeholder="password" ></input>
+                
+                <div className='da_inputs'>
+                    <p>Username</p>
+                    <input onChange={(e) => setUsername(e.target.value)} placeholder="username" ></input>
+                    <p id='password'>Password</p>
+                    <input onChange={(e) => setPassword(e.target.value)} placeholder="password" type='password'></input>
+                </div>
+                
                 <button id='sign-in'>Log In</button>
-                <p>Don't have an account? Create one <a onClick={navCreate} id='here'>here</a></p>
+                <p id='before-here'>Don't have an account? Create one <a onClick={navCreate} id='here'>here</a></p>
             </div>
         </div>
     </>)
