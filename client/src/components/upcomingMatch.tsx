@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/upcomingMatch.css';
 
 const UpcomingMatch = (matchId) => {
 
-    const [teamOne, setTeamOne] = useState();
-    const [teamTwo, setTeamTwo] = useState();
-    const [numGames, setNumGames] = useState();
-    const [logoOne, setLogoOne] = useState("");
-    const [logoTwo, setLogoTwo] = useState("");
-    const [leagueName, setLeagueName] = useState("");
-    const [time, setTime] = useState("");
+    const [teamOne, setTeamOne] = useState<string>("");
+    const [teamTwo, setTeamTwo] = useState<string>("");
+    const [numGames, setNumGames] = useState<number>(0);
+    const [logoOne, setLogoOne] = useState<string>("");
+    const [logoTwo, setLogoTwo] = useState<string>("");
+    const [leagueName, setLeagueName] = useState<string>("");
+    const [time, setTime] = useState<string>("");
 
     const months = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
 
     useEffect(() => {
         // convert time to display
-        let month = parseInt(matchId.time.substring(5,7));
-        month = months[month - 1];
+        const monthNum: number = parseInt(matchId.time.substring(5,7));
+        const month = months[monthNum - 1];
         let time = matchId.time.substring(11, 16);
         let hour = parseInt(time.substring(0,2));
         let isAm = true;

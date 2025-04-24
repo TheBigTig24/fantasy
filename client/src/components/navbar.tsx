@@ -1,6 +1,7 @@
 import '../styles/navbar.css';
 import Dropdown from '../assets/navbar.png';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const NavBar = () => {
 
@@ -24,12 +25,16 @@ const NavBar = () => {
 
     const toggleMenuOn = () => {
         const menu = document.getElementById('menu');
-        menu.style.animation = "menuToggleOn .4s forwards";
+        if (menu) {
+            menu.style.animation = "menuToggleOn .4s forwards";
+        }
     }
 
     const toggleMenuOff = () => {
         const menu = document.getElementById('menu');
-        menu.style.animation = "menuToggleOff .4s forwards";
+        if (menu) {
+            menu.style.animation = "menuToggleOff .4s forwards";
+        }
     }
 
     return(<>

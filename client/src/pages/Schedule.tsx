@@ -1,5 +1,5 @@
 import NavBar from "../components/navbar";
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/schedule.css'
 
 import UpcomingMatch from "../components/upcomingMatch";
@@ -7,9 +7,9 @@ import UpcomingMatch from "../components/upcomingMatch";
 
 const Schedule = () => {
 
-    const [stuff, setStuff] = useState([]);
-    const [starts, setStarts] = useState([]);
-    const [LCKid, setLCKid] = useState();
+    const [stuff, setStuff] = useState<number[]>([]);
+    const [starts, setStarts] = useState<string[]>([]);
+    const [LCKid, setLCKid] = useState<number>(0);
 
     // sets LCK League Id
     useEffect(() => {

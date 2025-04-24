@@ -1,12 +1,12 @@
 import '../styles/recentMatch.css'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const recentMatch = (matchId) => {
 
-    const [team1, setTeam1] = useState();
-    const [team2, setTeam2] = useState();
-    const [team1Score, setTeam1Score] = useState();
-    const [team2Score, setTeam2Score] = useState();
+    const [team1, setTeam1] = useState<string>("");
+    const [team2, setTeam2] = useState<string>("");
+    const [team1Score, setTeam1Score] = useState<number>(0);
+    const [team2Score, setTeam2Score] = useState<number>(0);
 
     useEffect(() => {
         fetch("https://esports-api.lolesports.com/persisted/gw/getEventDetails?hl=en-US&id=" + matchId.matchid, {

@@ -1,6 +1,7 @@
 import "../styles/landingPage.css";
 import NavBar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 function LandingPage() {
 

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import '../styles/playerServer.css';
+import React from 'react';
 
 const PlayerServer = () => {
 
-    const [serverName, setServerName] = useState("Diddy Party");
-    const [weeklyPoints, setWeeklyPoints] = useState(140.5);
+    const [serverName, setServerName] = useState<string>("Diddy Party");
+    const [weeklyPoints, setWeeklyPoints] = useState<number>(140.5);
 
     return(<button id='player-server-container'>
         <div id='ps-inner'>

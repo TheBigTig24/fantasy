@@ -2,14 +2,14 @@ import '../styles/home.css';
 import NavBar from '../components/navbar';
 import RecentMatch from '../components/recentMatch';
 import PlayerServer from '../components/playerServer';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
 
-    const [LCKid, setLCKid] = useState();
-    const [lastThree, setLastThree] = useState([]);
-    const [lastThreeTimes, setLastThreeTimes] = useState([]);
-    const [months, setMonths] = useState(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
+    const [LCKid, setLCKid] = useState<number>();
+    const [lastThree, setLastThree] = useState<number[]>([]);
+    const [lastThreeTimes, setLastThreeTimes] = useState<string[]>([]);
+    const months: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     // sets LCK League Id
     useEffect(() => {

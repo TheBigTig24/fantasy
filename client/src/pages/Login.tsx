@@ -1,17 +1,17 @@
 import '../styles/login.css'
 import NavBar from '../components/navbar';
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     const navCreate = () => {
-        navigate('/createAcc')
+        navigate('/createAcc');
     }
 
     return (<>
