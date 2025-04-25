@@ -1,5 +1,6 @@
 package com.fantasy.server.controller;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,13 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
         try{
+            // check for missing parameters
+            boolean hasMissingParameters = authenticationService2.checkHasMissingParameters(registerUserDto);
+            if (hasMissingParameters) {
+                return ResponseEntity.badRequest().body("Missing parameters.");
+            }
+
+            // sign up user 
             User registeredUser = authenticationService2.signup(registerUserDto);
             if (registeredUser == null) {
                 return ResponseEntity.badRequest().body("User already exists.");
