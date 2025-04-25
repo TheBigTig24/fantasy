@@ -1,7 +1,7 @@
-import NavBar from "../components/navbar"
-import '../styles/createAcc.css'
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import NavBar from "../components/navbar";
+import '../styles/createAcc.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateAcc = () => {
@@ -47,9 +47,9 @@ const CreateAcc = () => {
                         }
                     }).then((res) => {
                         if (res) {
-                            navigate('/home');
+                            localStorage.setItem('userId', res.userId);
+                            navigate('/verification');
                         } else {
-                            alert()
                             errMsg.innerHTML = "Incorrect username or password.";
                         }
                     }).catch((error) => {
