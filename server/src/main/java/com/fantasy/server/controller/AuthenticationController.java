@@ -1,6 +1,7 @@
 package com.fantasy.server.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.fantasy.server.reponses.LoginResponse;
 import com.fantasy.server.service.AuthenticationService2;
 import com.fantasy.server.service.JwtService;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
