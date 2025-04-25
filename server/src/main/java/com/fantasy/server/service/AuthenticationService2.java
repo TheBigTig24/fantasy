@@ -142,4 +142,14 @@ public class AuthenticationService2 {
             return false;
         }
     }
+
+    public boolean isValidPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        } else if (!password.matches(".*\\d.*")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

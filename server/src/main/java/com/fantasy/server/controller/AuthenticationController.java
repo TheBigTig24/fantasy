@@ -1,6 +1,5 @@
 package com.fantasy.server.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +33,12 @@ public class AuthenticationController {
             boolean hasMissingParameters = authenticationService2.checkHasMissingParameters(registerUserDto);
             if (hasMissingParameters) {
                 return ResponseEntity.badRequest().body("Missing parameters.");
+            }
+
+            // validate password
+            boolean isValidPassword = authenticationService2.isValidPassword(registerUserDto.getPassword());
+            if (!isValidPassword) {
+                return ResponseEntity.badRequest().body("Invalid password.");
             }
 
             // sign up user 
