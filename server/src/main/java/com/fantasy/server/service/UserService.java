@@ -7,7 +7,7 @@ import com.fantasy.server.repository.UserRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+// import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,11 +31,7 @@ public class UserService {
     }
 
     public User getOneById(Integer id) {
-        User u = new User();
-        u.setId(id);
-        Example<User> exam = Example.of(u);
-        User opt = userRepo.findOne(exam).orElse(null);
-        return opt;
+        return userRepo.findById(id).orElse(null);
     }
 
     public User getOneByEmail(String email) {
