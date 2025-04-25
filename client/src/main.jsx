@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import CreateAcc from './pages/CreateAcc'
 import Schedule from './pages/Schedule'
+import Verification from './pages/Verification';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,7 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/home' element={ <Home/> } />
         <Route path='/login' element={ <Login/> } />
         <Route path='/createAcc' element={ <CreateAcc/> } />
-        <Route path='/schedule' element={ <Schedule/>} />
+        <Route path='/schedule' element={ <Schedule/> } />
+        <Route path='/verification' element={ <Verification/> } />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

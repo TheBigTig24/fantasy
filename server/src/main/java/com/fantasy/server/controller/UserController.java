@@ -6,12 +6,14 @@ import com.fantasy.server.models.User;
 import com.fantasy.server.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -68,6 +71,21 @@ public class UserController {
         } else {
             return u;
         }
+    }
+
+    @GetMapping("/emailOnly")
+    public ResponseEntity<Map<String, String>> getOnlyEmail(@RequestParam Integer id) {
+        try {
+            User u = userService.getOneById(id);
+            if (u == null) {
+                return ResponseEntity.badRequest().body(Map.of("message", "User doesn't exist"));
+            } else {
+                return ResponseEntity.ok(Map.of("email", u.getEmail()));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Couldn't retrieve user email."));
+        }
+            
     }
     
     @DeleteMapping("/deleteOneById")
