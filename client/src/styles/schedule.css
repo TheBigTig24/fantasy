@@ -19,3 +19,7 @@
     margin: auto;
     overflow-y: scroll;
 }
+
+#schedule-inner-container::-webkit-scrollbar {
+    display: none;
+}
