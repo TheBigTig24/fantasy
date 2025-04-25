@@ -1,5 +1,7 @@
 package com.fantasy.server.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +68,7 @@ public class AuthenticationController {
     public ResponseEntity<?> verifyUser(@RequestBody VerifyUserDto verifyUserDto) {
         try {
             authenticationService2.verifyUser(verifyUserDto);
-            return ResponseEntity.ok("Account verified successfully.");
+            return ResponseEntity.ok(Map.of("message", "Account verified successfully."));
         } catch(RuntimeException rte) {
             return ResponseEntity.badRequest().body(rte.getMessage());
         }
@@ -76,7 +78,7 @@ public class AuthenticationController {
     public ResponseEntity<?> resendVerificationCode(@RequestParam String email) {
         try {
             authenticationService2.resendVerificationCode(email);
-            return ResponseEntity.ok("Verification code sent.");
+            return ResponseEntity.ok(Map.of("message", "Verification code sent."));
         } catch(RuntimeException rte) {
             return ResponseEntity.badRequest().body(rte.getMessage());
         }

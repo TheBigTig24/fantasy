@@ -6,6 +6,7 @@ import com.fantasy.server.models.User;
 import com.fantasy.server.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,6 +71,21 @@ public class UserController {
         } else {
             return u;
         }
+    }
+
+    @GetMapping("/emailOnly")
+    public ResponseEntity<Map<String, String>> getOnlyEmail(@RequestParam Integer id) {
+        try {
+            User u = userService.getOneById(id);
+            if (u == null) {
+                return ResponseEntity.badRequest().body(Map.of("message", "User doesn't exist"));
+            } else {
+                return ResponseEntity.ok(Map.of("email", u.getEmail()));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Couldn't retrieve user email."));
+        }
+            
     }
     
     @DeleteMapping("/deleteOneById")
