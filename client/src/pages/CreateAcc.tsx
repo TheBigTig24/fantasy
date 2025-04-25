@@ -13,6 +13,8 @@ const CreateAcc = () => {
     const [password, setPassword] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const handleForm = () => {
         try {
             const errMsg = document.getElementById('error-msg')
@@ -31,6 +33,7 @@ const CreateAcc = () => {
                     errMsg.innerHTML = "";
                     const reqBody = {"email": email, "password": password, "username": username};
                     const uri = "http://localhost:8080/api/v1/auth/signup";
+                    setIsLoading(true);
                     fetch(uri, {
                         "method": "POST",
                         "mode": "cors",
@@ -42,6 +45,7 @@ const CreateAcc = () => {
                         if (res.status == 200) {
                             return res.json();
                         } else {
+                            setIsLoading(false);
                             errMsg.innerHTML = "Unable to create account.";
                             console.error("Unable to create account.");
                         }
@@ -75,7 +79,7 @@ const CreateAcc = () => {
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="Enter a password" type="password"></input>
                 <span>Re-enter Password</span>
                 <input onChange={(e) => setPassword2(e.target.value)} placeholder="Re-enter a password" type="password"></input>
-                <button id="sign-in" onClick={handleForm}>Create Account</button>
+                {isLoading ? <div id="spinner"></div> : <button id="sign-in" onClick={handleForm}>Create Account</button>}
                 <p id="error-msg"></p>
             </div>
         </div>

@@ -32,3 +32,22 @@
     align-self: flex-start;
     margin-left: 1.5rem;
 }
+
+#spinner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+    border-top-color: #3498db;
+    animation: spinny 1s linear infinite;
+    margin: 1rem auto;
+}
+
+@keyframes spinny {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
