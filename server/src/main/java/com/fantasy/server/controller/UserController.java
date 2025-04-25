@@ -69,63 +69,6 @@ public class UserController {
             return u;
         }
     }
-
-    // @PostMapping("/login")
-    // public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> userLogIn(@RequestBody User user) {
-
-    //     ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
-    //     ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
-
-    //     UserTransfer u = userService.checkIfUserExists(user);
-    //     if (u != null) {
-    //         responseObject.setData(u);
-    //         responseObject.setMsg("Login Successful.");
-    //         responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.OK);
-    //         return responseEntity;
-    //     } else {
-    //         responseObject.setMsg("Unable to Log in.");
-    //         responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNAUTHORIZED);
-    //         return responseEntity;
-    //     }
-    // }
-
-    @PutMapping("/addOne")
-    public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> addSingleUser(@RequestBody User user) {
-
-        ResponseObject<UserTransfer> responseObject = new ResponseObject<UserTransfer>();
-        ResponseEntity<ResponseObject<UserTransfer>> responseEntity;
-        
-        boolean hasMissingParameters = userService.checkHasMissingParameters(user);
-        if (hasMissingParameters) {
-            responseObject.setMsg("There are missing parameters.");
-            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.UNPROCESSABLE_ENTITY);
-            return responseEntity;
-        }
-
-        UserTransfer foundUserByEmail = userService.checkIfUserExistsByEmail(user);
-        if (foundUserByEmail != null) {
-            responseObject.setData(foundUserByEmail);
-            responseObject.setMsg("Email already exists.");
-            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CONFLICT);
-            return responseEntity;
-        }
-
-        UserTransfer foundUserByUsername = userService.checkIfUserExistsByUsername(user);
-        if (foundUserByUsername != null) {
-            responseObject.setData(foundUserByUsername);
-            responseObject.setMsg("Username already exists.");
-            responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CONFLICT);
-            return responseEntity;
-        }
-
-        UserTransfer response = userService.postUser(user);
-
-        responseObject.setData(response);
-        responseObject.setMsg("User was created successfully.");
-        responseEntity = new ResponseEntity<ResponseObject<UserTransfer>>(responseObject, HttpStatus.CREATED);
-        
-        return responseEntity;
-    }
     
     @DeleteMapping("/deleteOneById")
     public @ResponseBody ResponseEntity<ResponseObject<UserTransfer>> deleteSingleUser(@RequestBody User user) {

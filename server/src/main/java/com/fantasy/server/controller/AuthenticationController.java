@@ -29,6 +29,19 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
         try{
+            // check for missing parameters
+            boolean hasMissingParameters = authenticationService2.checkHasMissingParameters(registerUserDto);
+            if (hasMissingParameters) {
+                return ResponseEntity.badRequest().body("Missing parameters.");
+            }
+
+            // validate password
+            boolean isValidPassword = authenticationService2.isValidPassword(registerUserDto.getPassword());
+            if (!isValidPassword) {
+                return ResponseEntity.badRequest().body("Invalid password.");
+            }
+
+            // sign up user 
             User registeredUser = authenticationService2.signup(registerUserDto);
             if (registeredUser == null) {
                 return ResponseEntity.badRequest().body("User already exists.");

@@ -132,4 +132,24 @@ public class AuthenticationService2 {
         int code = random.nextInt(900000) + 100000;
         return String.valueOf(code);
     }
+
+    public boolean checkHasMissingParameters(RegisterUserDto userDto) {
+        if (userDto.getEmail() == null || userDto.getPassword() == null || userDto.getUsername() == null) {
+            return true;
+        } else if (userDto.getEmail() == "" || userDto.getPassword() == "" || userDto.getUsername() == "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isValidPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        } else if (!password.matches(".*\\d.*")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
