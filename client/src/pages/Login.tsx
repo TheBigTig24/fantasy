@@ -69,7 +69,7 @@ const Login = () => {
                     <p id='password'>Password</p>
                     <input onChange={(e) => setPassword(e.target.value)} placeholder="password" type='password'></input>
                 </div>
-                <p id='err-msg'>asdf</p>
+                <p id='err-msg'></p>
                 <button id='sign-in' onClick={handleSubmit}>Log In</button>
                 <p id='before-here'>Don't have an account? Create one <a onClick={navCreate} id='here'>here</a></p>
             </div>
