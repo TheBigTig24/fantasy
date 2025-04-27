@@ -1,6 +1,6 @@
 import NavBar from "../components/navbar";
 import '../styles/createAcc.css';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 

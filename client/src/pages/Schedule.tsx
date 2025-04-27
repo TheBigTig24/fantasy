@@ -1,9 +1,13 @@
 import NavBar from "../components/navbar";
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/schedule.css'
 
 import UpcomingMatch from "../components/upcomingMatch";
 
+interface upcomingMatchObj {
+    matchid: number,
+    time: string
+}
 
 const Schedule = () => {
 
@@ -72,3 +76,4 @@ const Schedule = () => {
 };
 
 export default Schedule;
+export type { upcomingMatchObj };

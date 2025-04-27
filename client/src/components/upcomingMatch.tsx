@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/upcomingMatch.css';
+import { upcomingMatchObj } from '../pages/Schedule';
 
-const UpcomingMatch = (matchId) => {
+const UpcomingMatch = (matchId: upcomingMatchObj) => {
 
     const [teamOne, setTeamOne] = useState<string>("");
     const [teamTwo, setTeamTwo] = useState<string>("");

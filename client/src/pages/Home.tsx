@@ -2,7 +2,7 @@ import '../styles/home.css';
 import NavBar from '../components/navbar';
 import RecentMatch from '../components/recentMatch';
 import PlayerServer from '../components/playerServer';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
 
@@ -61,7 +61,7 @@ const Home = () => {
     }, [lastThree]);
 
     // convert date format
-    function convertTime(originalFormat) {
+    function convertTime(originalFormat: string) {
         const month = months[parseInt(originalFormat.substring(5,7)) - 1];
         const day = parseInt(originalFormat.substring(8,10));
         const year = parseInt(originalFormat.substring(0,4));

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import '../styles/playerServer.css';
-import React from 'react';
 
 const PlayerServer = () => {
 

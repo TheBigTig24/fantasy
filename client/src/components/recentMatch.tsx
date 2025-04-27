@@ -1,7 +1,12 @@
 import '../styles/recentMatch.css'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-const recentMatch = (matchId) => {
+interface matchObj {
+    matchid: number,
+    startTime: string
+}
+
+const recentMatch = (matchId: matchObj) => {
 
     const [team1, setTeam1] = useState<string>("");
     const [team2, setTeam2] = useState<string>("");
@@ -38,3 +43,4 @@ const recentMatch = (matchId) => {
 }
 
 export default recentMatch; 
+export type { matchObj };
