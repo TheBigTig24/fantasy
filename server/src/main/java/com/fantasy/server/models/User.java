@@ -3,7 +3,6 @@ package com.fantasy.server.models;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-// import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -38,10 +36,6 @@ public class User implements UserDetails {
 
     @Column(name = "createdAt")
     private LocalDateTime createdAt;
-
-    // @Column
-    // @OneToMany(mappedBy = "user")
-    // private Set<ServerRank> playerServers;
 
     private boolean enabled;
 
@@ -140,14 +134,6 @@ public class User implements UserDetails {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
-    // public Set<ServerRank> getServers() {
-    //     return playerServers;
-    // }
-
-    // public void setPlayerServers(Set<ServerRank> playerServers) {
-    //     this.playerServers = playerServers;
-    // }
 
     // just for testing purposes for now
     public String toString() {

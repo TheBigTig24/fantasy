@@ -7,35 +7,45 @@ import jakarta.persistence.Embeddable;
 public class Setting {
 
     @Column(name = "killMult", table = "Settings")
-    private int killMult;
+    private float killMult;
 
     @Column(name = "deathMult", table = "Settings")
-    private int deathMult;
+    private float deathMult;
 
     @Column(name = "assistMult", table = "Settings")
-    private int assistMult;
+    private float assistMult;
 
     @Column(name = "csMult", table = "Settings")
-    private int csMult;
+    private float csMult;
 
     @Column(name = "kpMult", table = "Settings")
-    private int kpMult;
+    private float kpMult;
 
     @Column(name = "dmgPercMult", table = "Settings")
-    private int dmgPercentageMult;
+    private float dmgPercentageMult;
 
     @Column(name = "wardsPlacedMult", table = "Settings")
-    private int wardsPlacedMult;
+    private float wardsPlacedMult;
 
     @Column(name = "wardsDestroyedMult", table = "Settings")
-    private int wardsDestroyedMult;
+    private float wardsDestroyedMult;
 
     @Column(name = "gameResultMult", table = "Settings")
-    private int gameResultMult;
+    private float gameResultMult;
 
-    public Setting() {}
+    public Setting() {
+        this.killMult = 3f;
+        this.deathMult = -.5f;
+        this.assistMult = 1f;
+        this.csMult = .1f;
+        this.kpMult = 1f;
+        this.dmgPercentageMult = 1f;
+        this.wardsPlacedMult = 2f;
+        this.wardsDestroyedMult = 2f;
+        this.gameResultMult = 5f;
+    }
 
-    public Setting(int killMult, int deathMult, int assistMult, int csMult, int kpMult, int dmgPercentageMult, int wardsPlacedMult, int wardsDestroyedMult, int gameResultMult) {
+    public Setting(float killMult, float deathMult, float assistMult, float csMult, float kpMult, float dmgPercentageMult, float wardsPlacedMult, float wardsDestroyedMult, float gameResultMult) {
         this.killMult = killMult;
         this.deathMult = deathMult;
         this.assistMult = assistMult;
@@ -47,75 +57,75 @@ public class Setting {
         this.gameResultMult = gameResultMult;
     }
 
-    public int getKillMult() {
+    public float getKillMult() {
         return killMult;
     }
 
-    public void setKillMult(int killMult) {
+    public void setKillMult(float killMult) {
         this.killMult = killMult;
     }
 
-    public int getDeathMult() {
+    public float getDeathMult() {
         return deathMult;
     }
 
-    public void setDeathMult(int deathMult) {
+    public void setDeathMult(float deathMult) {
         this.deathMult = deathMult;
     }
 
-    public int getAssistMult() {
+    public float getAssistMult() {
         return assistMult;
     }
 
-    public void setAssistMult(int assistMult) {
+    public void setAssistMult(float assistMult) {
         this.assistMult = assistMult;
     }
 
-    public int getCsMult() {
+    public float getCsMult() {
         return csMult;
     }
 
-    public void setCsMult(int csMult) {
+    public void setCsMult(float csMult) {
         this.csMult = csMult;
     }
 
-    public int getKpMult() {
+    public float getKpMult() {
         return kpMult;
     }
 
-    public void setKpMult(int kpMult) {
+    public void setKpMult(float kpMult) {
         this.kpMult = kpMult;
     }
 
-    public int getDmgPercMult() {
+    public float getDmgPercMult() {
         return dmgPercentageMult;
     }
 
-    public void setDmgPercMult(int dmgPercentageMult) {
+    public void setDmgPercMult(float dmgPercentageMult) {
         this.dmgPercentageMult = dmgPercentageMult;
     }
 
-    public int getWardsPlacedMult() {
+    public float getWardsPlacedMult() {
         return wardsPlacedMult;
     }
 
-    public void setWardsPlacedMult(int wardsPlacedMult) {
+    public void setWardsPlacedMult(float wardsPlacedMult) {
         this.wardsPlacedMult = wardsPlacedMult;
     }
 
-    public int getWardsDestroyedMult() {
+    public float getWardsDestroyedMult() {
         return wardsDestroyedMult;
     }
 
-    public void setWardsDestroyedMult(int wardsDestroyedMult) {
+    public void setWardsDestroyedMult(float wardsDestroyedMult) {
         this.wardsDestroyedMult = wardsDestroyedMult;
     }
 
-    public int getGameResultMult() {
+    public float getGameResultMult() {
         return gameResultMult;
     }
 
-    public void setGameResultMult(int gameResultMult) {
+    public void setGameResultMult(float gameResultMult) {
         this.gameResultMult = gameResultMult;
     }
 }
